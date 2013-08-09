@@ -24,11 +24,24 @@
 	}
 	body.appendChild(listOfGamepads);
 
+	var gamepadData = document.createElement('p');
+	var leftX = document.createElement('span');
+	var leftY = document.createElement('span');
+	var rightX = document.createElement('span');
+	var rightY = document.createElement('span');
+	gamepadData.appendChild(leftX);
+	gamepadData.appendChild(leftY);
+	gamepadData.appendChild(rightX);
+	gamepadData.appendChild(rightY);
+	body.appendChild(gamepadData);
+
 	function logGamepad() {
 	    var gamepad = navigator.webkitGetGamepads()[0];
 	    if (!!gamepad) {
-		console.log(gamepad.axes);
-		console.log(gamepad.buttons);
+		leftX.textContent = gamepad.axes[0];
+		leftY.textContent = gamepad.axes[1];
+		rightX.textContent = gamepad.axes[2];
+		rightY.textContent = gamepad.axes[3];
 	    }
 	    requestAnimationFrame(logGamepad);
 	}
