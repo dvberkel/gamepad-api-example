@@ -23,6 +23,16 @@
 
 	}
 	body.appendChild(listOfGamepads);
+
+	function logGamepad() {
+	    var gamepad = navigator.webkitGetGamepads()[0];
+	    if (!!gamepad) {
+		console.log(gamepad.axes);
+		console.log(gamepad.buttons);
+	    }
+	    requestAnimationFrame(logGamepad);
+	}
+	logGamepad();
     }
 
 })(window, document, navigator);
