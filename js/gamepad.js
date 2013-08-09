@@ -25,10 +25,10 @@
 	body.appendChild(listOfGamepads);
 
 	var gamepadData = document.createElement('p');
-	var leftX = document.createElement('span');
-	var leftY = document.createElement('span');
-	var rightX = document.createElement('span');
-	var rightY = document.createElement('span');
+	var leftX = document.createElement('span'); leftX.setAttribute('class', 'bracket');
+	var leftY = document.createElement('span'); leftY.setAttribute('class', 'bracket');
+	var rightX = document.createElement('span'); rightX.setAttribute('class', 'bracket');
+	var rightY = document.createElement('span'); rightY.setAttribute('class', 'bracket');
 	gamepadData.appendChild(leftX);
 	gamepadData.appendChild(leftY);
 	gamepadData.appendChild(rightX);

@@ -1,0 +1,9 @@
+.bracket:before {
+    content: '(';
+}
+.bracket {
+    margin: 0 5px;
+}
+.bracket:after {
+    content: ')';
+}
