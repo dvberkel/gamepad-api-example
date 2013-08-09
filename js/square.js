@@ -45,8 +45,8 @@
     SquareView.prototype.redraw = function redraw(){
 	this.container.style.left = square.x;
 	this.container.style.top = square.y;
-	this.container.style.width = square.widht;
-	this.container.style.height = square.widht;
+	this.container.style.width = square.width;
+	this.container.style.height = square.width;
     }
 
     function extend(target, extention) {
@@ -58,18 +58,22 @@
 
     function SquareController(square, options) {
 	this.square = square;
-	this.options = extend({vx : 1, vy : 1}, options || {});
+	this.options = extend({vx : 1, vy : 1, vw: 1}, options || {});
     };
     SquareController.prototype.update = function update(){
 	var gamepad = navigator.webkitGetGamepads()[0];
 	if (!!gamepad) {
 	    var deltaX = gamepad.axes[0];
 	    var deltaY = gamepad.axes[1];
+	    var deltaW = gamepad.axes[3];
 	    if (Math.abs(deltaX) > 0.2) {
 		this.square.dx(this.options.vx * deltaX);
 	    }
 	    if (Math.abs(deltaY) > 0.2) {
 		this.square.dy(this.options.vy * deltaY);
+	    }
+	    if (Math.abs(deltaW) > 0.2) {
+		this.square.dw(-1 * this.options.vw * deltaW);
 	    }
 	}
     }
@@ -87,6 +91,6 @@
 
     var square = new Square(document.width/2, document.height/2, 100);
     new SquareView(square);
-    new SquareController(square, { vx: 10, vy: 10 }).control();
+    new SquareController(square, { vx: 10, vy: 10, vw: 3 }).control();
     square.notify();
 })(window, document, navigator);
