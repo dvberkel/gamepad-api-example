@@ -49,8 +49,16 @@
 	this.container.style.height = square.widht;
     }
 
-    function SquareController(square) {
+    function extend(target, extention) {
+	for (key in extention) {
+	    target[key] = extention[key];
+	}
+	return target;
+    }
+
+    function SquareController(square, options) {
 	this.square = square;
+	this.options = extend({vx : 1, vy : 1}, options || {});
     };
     SquareController.prototype.update = function update(){
 	var gamepad = navigator.webkitGetGamepads()[0];
@@ -58,10 +66,10 @@
 	    var deltaX = gamepad.axes[0];
 	    var deltaY = gamepad.axes[1];
 	    if (Math.abs(deltaX) > 0.2) {
-		this.square.dx(deltaX);
+		this.square.dx(this.options.vx * deltaX);
 	    }
 	    if (Math.abs(deltaY) > 0.2) {
-		this.square.dy(deltaY);
+		this.square.dy(this.options.vy * deltaY);
 	    }
 	}
     }
@@ -79,6 +87,6 @@
 
     var square = new Square(document.width/2, document.height/2, 100);
     new SquareView(square);
-    new SquareController(square).control();
+    new SquareController(square, { vx: 10, vy: 10 }).control();
     square.notify();
 })(window, document, navigator);
